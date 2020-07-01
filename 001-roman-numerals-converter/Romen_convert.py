@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request
 
-app = Flask(__name__)
+Romen_convert = Flask(__name__)
 
-@app.route('/')
+@Romen_convert.route('/')
 def convert_to_roman(num):
 	roman = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I']
 	sayi = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
@@ -13,11 +13,11 @@ def convert_to_roman(num):
 			romanvalue += roman[i]
 	return romanvalue
 
-@app.route('/', methods = ['GET'])
+@Romen_convert.route('/', methods = ['GET'])
 def main_get():
     return render_template('index.html', developer_name = 'Serkan', not_valid = False)
 
-@app.route('/', methods = ['POST'])
+@Romen_convert.route('/', methods = ['POST'])
 def main_post():
     alpha = request.form['number']
     if not alpha.isdecimal():
@@ -28,9 +28,9 @@ def main_post():
     return render_template('result.html', number_decimal = number, number_roman = convert_to_roman(number), developer_name = 'Serkan')
 
 if __name__=='__main__':
-    app.run()
-    #app.run(debug=True)
-    #app.run('0.0.0.0',port=80)
+    Romen_convert.run()
+    #Romen_convert.run(debug=True)
+    #Romen_convert.run('0.0.0.0',port=80)
 
 
 
