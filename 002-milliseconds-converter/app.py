@@ -32,9 +32,9 @@ def main_post():
     return render_template('result.html', milliseconds = number, result = calc_time(number), developer_name = 'Serkan')
 
 if __name__=='__main__':
-    app.run()
+    #app.run()
     #app.run(debug=True)
-    #app.run('0.0.0.0',port=80)
+    app.run('0.0.0.0',port=80)
 
 
 
