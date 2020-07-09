@@ -36,10 +36,11 @@
 
     button {
       box-sizing: border-box;
-      background-color: #4caf50;
+      font-family: 'Montserrat Alternates', Sans-Serif;
+      background-color: #9a2e8ff4;
       color: white;
       padding: 16px 20px;
-      margin: 8px 0;
+      margin: 10px 0;
       border: none;
       cursor: pointer;
       width: 100%;
@@ -69,11 +70,11 @@
     <input placeholder="50" name="number" id="number" required />
     <button type="submit">Submit</button>
     {% if not_valid %}
-    <p class="warning"><b>Not Valid! Please enter a number greater than zero.</b></p>
+    <p class="warning"><b>Not Valid! Please enter a number and it should be greater than zero.</b></p>
     {% endif %}
   </form>
 
-  <p class="footnote"><i>This app is developed in Python by <b>{{ developer_name }}</b> and deployed with Flask on AWS EC2 Instance using AWS Clouldformation Service.</i></p>
+  <p class="footnote"><i>This app is developed in Python by <b>{{ developer_name }}</b> and deployed with Flask on AWS EC2 Instance, ELB (Electronic Load Balance) and, Autoscaling Group using AWS Clouldformation Service.</i></p>
 </body>
 
 </html>
