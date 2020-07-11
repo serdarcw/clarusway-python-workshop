@@ -81,7 +81,7 @@ Resources:
       AvailabilityZones:
         - !Ref VPCPublicSubnetAZ
       LaunchConfigurationName: !Ref WebServerConfig
-      MinSize: 1
+      MinSize: 2
       MaxSize: 3
       LoadBalancerNames:
         - !Ref ElasticLoadBalancer
@@ -125,30 +125,22 @@ Resources:
       InstanceType: !FindInMap [EC2TypeConfig, !Ref ENV, InstanceType]
       SecurityGroups:
         - !Ref WebServerSecurityGroup
-      UserData: !Base64 |
-        #!/bin/bash
-        yum update -y
-        yum install python3 -y
-        pip3 install flask
-        cd /home/ec2-user/
-        wget https://raw.githubusercontent.com/serkangumus/clarusway-python-workshop/master/002-milliseconds-converter/app.py
-        mkdir templates
-        cd templates
-        wget https://raw.githubusercontent.com/serkangumus/clarusway-python-workshop/master/002-milliseconds-converter/templates/index.html
-        wget https://raw.githubusercontent.com/serkangumus/clarusway-python-workshop/master/002-milliseconds-converter/templates/result.html
-        cd ..
-        python3 app.py
       IamInstanceProfile: !Ref WebServerInstanceProfile
       UserData:
         Fn::Base64:
           !Sub |
             #!/bin/bash
-            yum update -y aws-cfn-bootstrap
-            /opt/aws/bin/cfn-init -s ${AWS::StackName} -r WebServerConfig --region ${AWS::Region}
-
-            /opt/aws/bin/cfn-hup || error_exit 'Failed to start cfn-hup'
-
-            /opt/aws/bin/cfn-signal --exit-code $? --stack ${AWS::StackName} --resource WebServerConfig --region ${AWS::Region}
+            yum update -y
+            yum install python3 -y
+            pip3 install flask
+            cd /home/ec2-user/
+            wget https://raw.githubusercontent.com/serkangumus/clarusway-python-workshop/master/002-milliseconds-converter/app.py
+            mkdir templates
+            cd templates
+            wget https://raw.githubusercontent.com/serkangumus/clarusway-python-workshop/master/002-milliseconds-converter/templates/index.html
+            wget https://raw.githubusercontent.com/serkangumus/clarusway-python-workshop/master/002-milliseconds-converter/templates/result.html
+            cd ..
+            python3 app.py
 Outputs:
   WebsiteURL:
     Value: !Sub http://${ElasticLoadBalancer.DNSName}
