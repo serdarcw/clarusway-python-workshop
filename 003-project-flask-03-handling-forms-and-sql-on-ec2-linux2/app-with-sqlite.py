@@ -29,7 +29,7 @@ VALUES
 """
 
 db.session.execute(drop_table)
-db.session.execute(user_table)
+db.session.execute(users_table)
 db.session.execute(data)
 db.session.commit()
 
@@ -93,7 +93,7 @@ def emails():
 def add_email():
     if request.method == 'POST':
         user_name = request.form['username']
-        user.email = request.form['useremail']
+        user_email = request.form['useremail']
         result = insert_email(user_name, user_email)
         return render_template('add-email.html', result=result, show_result=True)
     else:
