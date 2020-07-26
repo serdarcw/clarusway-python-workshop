@@ -15,7 +15,7 @@ def calc_time(total_millisec):
     if B[0]!=0 or B[1]!=0 or B[2]!=0:
         return ((B[0]!=0)*(str(B[0])+' hour/s '))+((B[1]!=0)*(str(B[1])+' minute/s '))+((B[2]!=0)*(str(B[2])+' second/s '))
     else:
-        return str(B[3])+' milisecond/s'
+        return 'just'+' '+str(B[3])+' milisecond/s'
 
 @app.route('/', methods = ['GET'])
 def main_get():
