@@ -20,10 +20,10 @@ def main_get():
 def main_post():
     alpha = request.form['number']
     if not alpha.isdecimal():
-        return render_template('index.html', developer_name = 'Serkan', not_valid = True)
+        return render_template('index.html', developer_name = 'Serkan', belkis = True)
     number = int(alpha)
     if not 0 < number < 4000:
-        return render_template('index.html', developer_name = 'Serkan',  not_valid = True)
+        return render_template('index.html', developer_name = 'Serkan',  belkis = True)
     return render_template('result.html', number_decimal = number, number_roman = convert_to_roman(number), developer_name = 'Serkan')
 
 if __name__=='__main__':
